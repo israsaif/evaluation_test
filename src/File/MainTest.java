@@ -15,35 +15,42 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class MainTest {
 
+	private static final String Scanner = null;
+
 	public static void main(String[] args) throws IOException, InterruptedException {
-		Set<String> uniqueStringHS = new HashSet();
+		//Scanner sa = new Scanner(System.in);
 		boolean menue = true;
 		do {
-			Scanner sa = new Scanner(System.in);
+			Scanner sa1 = new Scanner(System.in);
 			// while(menue) {
 			System.out.println("=====Welcome to my project=========");
 			System.out.println("=====choose one option=====");
 			System.out.println("========================");
 
-			System.out.println("1.writr/read file");
+			System.out.println("1.write/ read file");
 			System.out.println("2.search file");
-
+			System.out.println("3.pdf file");
 			System.out.println("========================");
 			System.out.println("========================");
 
 			{
-				String bb = sa.next();
+				String bb = sa1.next();
 				int option = Integer.parseInt(bb);
 				switch (option) {
 				case 1:
 
-					// Scanner sa=new Scanner(System.in);
-					// System.out.println("Enter name:");
-					// String num =sa.next();
-
+					//System.out.println(" choose pdf or txt  ");
+					//int oneOption = sa.nextInt();
+//					System.out.println("do you want to txt file press 1//");
+//					int txtFile = sa.nextInt();
+//					if (txtFile == 1) {
+					
 					String ur1 = "https://ipinfo.io/161.185.160.93/geo";
 					HttpClient client = HttpClient.newHttpClient();
 					System.out.println(ur1);
@@ -73,20 +80,29 @@ public class MainTest {
 					} catch (IOException e) {
 
 						e.printStackTrace();
+					
+						
 					}
-					break;
+						
+					
+				//if (pdfFile == 2) {
+						
+						
+					  break;
+					
 				case 2:
 
 					System.out.println("file created");
 					// Reading the words to be found from the user
-					Scanner sc1 = new Scanner(System.in);
+					Scanner sa = new Scanner(System.in);
 					ArrayList<String> theDuplicateString = new ArrayList<>();
+					Set<String> uniqueStringHS = new HashSet();
 					
 					System.out.println("How many word string do you want to enter");
-					int amtOfWord = sc1.nextInt();
+					int amtOfWord = sa.nextInt();
 					for (int i = 0; i < amtOfWord; i++) {
 						System.out.println("Enter the words to be found");
-						String word = sc1.next();
+						String word = sa.next();
 						String theDuplicteString;
 						if (!theDuplicateString.contains(word)) {
 							theDuplicateString.add(word);
@@ -115,10 +131,63 @@ public class MainTest {
 
 						}
 					}
-				}
+				
+			  break;
+			
+		case 3:
+			boolean isExit = true;
+
+			while (isExit) {
+
+			Scanner sc = new Scanner(System.in);
+
+			System.out.println("**********************************");
+			// Reading the word to be found from the user
+			System.out.println("Enter the word you want to search pdf ");
+			String input = sc.next();
+
+			// consuming the <enter> from input above
+			sc.nextLine();
+			boolean word2 = false;
+			int wordCount = 0;
+
+			// Reading the String of the file
+			Scanner sc11 = new Scanner(new FileInputStream("sample.pdf"));
+			while (sc11.hasNextLine()) {
+			String word1 = sc11.nextLine();
+//			     System.out.println(line);
+			if (word1.indexOf(input) != -1) {
+			word2 = true;
+			wordCount = wordCount + 1;
+			}
+			}
+			if (word2) {
+			System.out.println("PDF File contains the  word");
+			System.out.println("Number of word is: " + wordCount);
+			System.out.println("__________________________________");
+
+			} else {
+			System.out.println("PDF File does not contain the word");
+			System.out.println("__________________________________");
 
 			}
-		} while (menue = true);
+			System.out.println("if you want to search another word press 1 and 2 to exit ");
+			Integer s = sc.nextInt();
+			if (s == 1) {
+			isExit = true;
+			} else if (s == 2) {
+			isExit = false;
+			System.out.println("Exit");
+			}
 
-	}
+			}
+		  break;
+			
+			
+		
+			}
+			}
+          }while (menue = true);
+	  }
 }
+		
